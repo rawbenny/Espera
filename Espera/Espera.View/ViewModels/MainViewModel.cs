@@ -20,9 +20,6 @@ namespace Espera.View.ViewModels
         private string searchText;
         private volatile bool isAdding;
         private bool isLocal;
-        private bool isYoutube;
-
-        public AdministratorViewModel AdministratorViewModel { get; private set; }
 
         public StatusViewModel StatusViewModel { get; private set; }
 
@@ -44,23 +41,7 @@ namespace Espera.View.ViewModels
             }
         }
 
-        public bool IsYoutube
-        {
-            get { return this.isYoutube; }
-            set
-            {
-                if (this.IsYoutube != value)
-                {
-                    this.isYoutube = value;
-                    this.OnPropertyChanged(vm => vm.IsYoutube);
-
-                    if (this.IsYoutube)
-                    {
-                        this.SearchText = String.Empty;
-                    }
-                }
-            }
-        }
+      
 
         public bool IsVlcInstalled
         {
@@ -117,7 +98,6 @@ namespace Espera.View.ViewModels
                     this.OnPropertyChanged(vm => vm.SelectedArtist);
                     this.OnPropertyChanged(vm => vm.SelectableLocalSongs);
                     this.IsLocal = true;
-                    this.IsYoutube = false;
                 }
             }
         }
@@ -473,7 +453,7 @@ namespace Espera.View.ViewModels
                 this.OnPropertyChanged(vm => vm.SelectableLocalSongs);
             };
 
-            this.AdministratorViewModel = new AdministratorViewModel(this.library);
+           
             this.StatusViewModel = new StatusViewModel(this.library);
 
             this.updateTimer = new Timer(333);

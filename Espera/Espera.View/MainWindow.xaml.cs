@@ -19,7 +19,6 @@ namespace Espera.View
     /// </summary>
     public partial class MainWindow
     {
-        private bool showAdministratorPanel;
 
         public MainWindow()
         {
@@ -27,7 +26,7 @@ namespace Espera.View
 
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-us");
 
-            this.ChangeColor("Blue");
+            this.ChangeColor("Green");
         }
 
         private void ChangeColor(string color)
@@ -73,39 +72,7 @@ namespace Espera.View
                 this.mainViewModel.PlayCommand.Execute(null);
             }
         }
-
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            this.mainViewModel.AdministratorViewModel.Password = ((PasswordBox)sender).Password;
-        }
-
-        private void AdminPanelToggleButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.showAdministratorPanel = !this.showAdministratorPanel;
-
-            this.adminPanel.Visibility = this.showAdministratorPanel ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        private void RedColorButtonButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.ChangeColor("Red");
-        }
-
-        private void GreenColorButtonButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.ChangeColor("Green");
-        }
-
-        private void BlueColorButtonButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.ChangeColor("Blue");
-        }
-
-        private void PurpleColorButtonButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.ChangeColor("Purple");
-        }
-
+       
         private void SearchTextBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.Enter)

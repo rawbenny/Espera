@@ -5,12 +5,14 @@
                       xmlns:ViewModels="clr-namespace:Espera.View.ViewModels"
                       xmlns:WPF="clr-namespace:Rareform.WPF;assembly=Rareform"
                       Title="Espera"
-                      Height="600"
-                      Width="800"
-                      WindowState="Maximized"
+                      Height="768"
+                      Width="1024"
+                      WindowState="Normal"
                       Icon="/Espera.View;component/Images/appbar.music.png"
                       Closing="MetroWindowClosing"
-                      KeyUp="MetroWindow_KeyUp">
+                      KeyUp="MetroWindow_KeyUp" 
+                      WindowStartupLocation="CenterScreen" 
+                      ResizeMode="CanMinimize">
     <Window.DataContext>
         <ViewModels:MainViewModel x:Name="mainViewModel" />
     </Window.DataContext>
@@ -37,17 +39,7 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            <Style x:Key="ColorPickerButtonStyle" TargetType="{x:Type Button}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}" Height="15" Width="15" >
-                                <ContentPresenter  />
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+            
         </ResourceDictionary>
     </Window.Resources>
     <Grid Margin="10">
@@ -160,13 +152,6 @@
                      Width="150"
                      Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged}"
                      KeyUp="SearchTextBox_KeyUp" />
-            <Button Grid.Column="5"
-                    Margin="10, 0, 0, 0"
-                    Padding="0"
-                    ToolTip="Settings"
-                    Click="AdminPanelToggleButton_Click">
-                <Image Source="/Espera.View;component/Images/appbar.settings.png" />
-            </Button>
         </Grid>
         <Grid Grid.Row="1"
               Margin="0, 10, 0, 0">
@@ -458,132 +443,7 @@
                         <TextBlock Text=" minutes play time" />
                     </StackPanel>
                 </Grid>
-            </Grid>
-            <Grid Grid.Column="2"
-                  Name="adminPanel"
-                  Width="200"
-                  DataContext="{Binding Path=AdministratorViewModel}">
-                <Grid.Style>
-                    <Style TargetType="{x:Type Grid}">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=IsAdminCreated, Mode=OneTime}" Value="False">
-                                <Setter Property="Visibility" Value="Collapsed" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding Path=IsUser}" Value="True">
-                                <Setter Property="Visibility" Value="Collapsed" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Grid.Style>
-                <Border BorderBrush="{DynamicResource TextBoxBorderBrush}"
-                        BorderThickness="0.5"
-                        Padding="5">
-                    <Grid>
-                        <Grid>
-                            <Grid.Style>
-                                <Style TargetType="{x:Type Grid}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Path=IsAdminCreated}" Value="True">
-                                            <Setter Property="Visibility" Value="Hidden" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Path=IsUser}" Value="True">
-                                            <Setter Property="Visibility" Value="Visible" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Grid.Style>
-                            <StackPanel VerticalAlignment="Center"
-                                        HorizontalAlignment="Center" >
-                                <TextBlock HorizontalAlignment="Center">
-                                    <TextBlock.Style>
-                                        <Style TargetType="{x:Type TextBlock}">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Path=IsAdminCreated}" Value="False">
-                                                    <Setter Property="Text" Value="Enter a password:" />
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Path=IsUser}" Value="True">
-                                                    <Setter Property="Text" Value="Enter the administrator password:" />
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
-                                <PasswordBox Margin="0, 5, 0, 0"
-                                             WPF:PasswordBoxBinder.Attach="True"
-                                             WPF:PasswordBoxBinder.Password="{Binding Path=Password, Mode=TwoWay}"
-                                             PasswordChanged="PasswordBox_PasswordChanged" />
-                                <Button Margin="0, 10, 0, 0">
-                                    <Button.Style>
-                                        <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="{x:Type Button}">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Path=IsAdminCreated}" Value="False">
-                                                    <Setter Property="Content" Value="Create Administrator" />
-                                                    <Setter Property="Command" Value="{Binding Path=CreateAdminCommand}" />
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding Path=IsAdminCreated}" Value="True">
-                                                    <Setter Property="Content" Value="Login" />
-                                                    <Setter Property="Command" Value="{Binding Path=LoginCommand}" />
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                </Button>
-                            </StackPanel>
-                        </Grid>
-                        <Grid>
-                            <Grid.Style>
-                                <Style TargetType="{x:Type Grid}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Path=IsAdmin}" Value="True">
-                                            <Setter Property="Visibility" Value="Visible" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Path=IsUser}" Value="True">
-                                            <Setter Property="Visibility" Value="Hidden" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Path=IsAdminCreated}" Value="False">
-                                            <Setter Property="Visibility" Value="Hidden" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Grid.Style>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <StackPanel HorizontalAlignment="Center"
-                                            Margin="0, 5, 0, 0">
-                                    <TextBlock Text="Color"
-                                               HorizontalAlignment="Center"/>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button Style="{StaticResource ColorPickerButtonStyle}"
-                                                Background="Red"
-                                                Click="RedColorButtonButton_Click" />
-                                        <Button Style="{StaticResource ColorPickerButtonStyle}"
-                                                Background="Green"
-                                                Margin="2, 0, 0, 0"
-                                                Click="GreenColorButtonButton_Click" />
-                                        <Button Style="{StaticResource ColorPickerButtonStyle}"
-                                                Background="Blue"
-                                                Margin="2, 0, 0, 0"
-                                                Click="BlueColorButtonButton_Click" />
-                                        <Button Style="{StaticResource ColorPickerButtonStyle}"
-                                                Background="Purple"
-                                                Margin="2, 0, 0, 0"
-                                                Click="PurpleColorButtonButton_Click" />
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                            <Button Grid.Row="1"
-                                    Content="Change to user"
-                                    Command="{Binding Path=ChangeToUserCommand}" />
-                        </Grid>
-                    </Grid>
-                </Border>
-            </Grid>
+            </Grid>   
         </Grid>
         <StatusBar Grid.Row="2"
                    Margin="0, 5, 0, 0"
