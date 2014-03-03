@@ -48,16 +48,6 @@
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Google.GData.Client">
-      <HintPath>..\packages\Google.GData.Client.1.9.0.0\lib\Google.GData.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.GData.Extensions">
-      <HintPath>..\packages\Google.GData.Extensions.1.9.0.0\lib\Google.GData.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.GData.YouTube">
-      <HintPath>..\packages\Google.GData.YouTube.1.9.0.0\lib\Google.GData.YouTube.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </Reference>
     <Reference Include="NAudio">
       <HintPath>..\packages\NAudio.1.5\lib\NAudio.dll</HintPath>
     </Reference>
@@ -88,7 +78,6 @@
     <Compile Include="Audio\LocalAudioPlayer.cs" />
     <Compile Include="Audio\AudioPlayerState.cs" />
     <Compile Include="Audio\AudioType.cs" />
-    <Compile Include="Audio\YoutubeAudioPlayer.cs" />
     <Compile Include="Library\InvalidPasswordException.cs" />
     <Compile Include="Library\Library.cs" />
     <Compile Include="Library\LibraryFillEventArgs.cs" />
@@ -101,8 +90,6 @@
     <Compile Include="SongEventArgs.cs" />
     <Compile Include="LocalSongFinder.cs" />
     <Compile Include="SongFinder.cs" />
-    <Compile Include="YoutubeSong.cs" />
-    <Compile Include="YoutubeSongFinder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

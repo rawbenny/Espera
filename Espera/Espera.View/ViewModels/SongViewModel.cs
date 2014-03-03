@@ -20,11 +20,7 @@ namespace Espera.View.ViewModels
         {
             get
             {
-                var song = this.Model as YoutubeSong;
-
-                return song == null
-                           ? null
-                           : (this.thumbnail ?? (this.thumbnail = new BitmapImage(song.ThumbnailSource)));
+                return null;
             }
         }
 
@@ -32,9 +28,7 @@ namespace Espera.View.ViewModels
         {
             get
             {
-                var song = this.Model as YoutubeSong;
-
-                return song == null ? null : song.Description;
+                return null;
             }
         }
 
@@ -48,16 +42,6 @@ namespace Espera.View.ViewModels
             get
             {
                 return new RelayCommand(param => Process.Start(this.Path));
-            }
-        }
-
-        public double? Rating
-        {
-            get
-            {
-                var song = this.Model as YoutubeSong;
-
-                return song != null && song.Rating > 0 ? (double?)song.Rating : null;
             }
         }
 

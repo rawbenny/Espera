@@ -10,7 +10,7 @@ using System.Windows.Input;
 using Espera.View.ViewModels;
 using MahApps.Metro;
 using ListView = System.Windows.Controls.ListView;
-using Ionic.Utils;
+
 
 namespace Espera.View
 {
@@ -37,7 +37,7 @@ namespace Espera.View
 
         private void AddSongsButtonClick(object sender, RoutedEventArgs e)
         {
-            var dialog = new FolderBrowserDialogEx
+            var dialog = new FolderBrowserDialog
             {
                 Description = "Choose a folder containing the music that you want to add to the library"
             };

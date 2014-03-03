@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.Win32;
+using System;
+using System.Runtime.InteropServices;
 
 namespace Espera.View
 {
@@ -36,15 +38,20 @@ namespace Espera.View
             }
 
             // Search in: LocalMachine_64
-            key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall");
-
-            foreach (RegistryKey subkey in key.GetSubKeyNames().Select(keyName => key.OpenSubKey(keyName)))
+            // This key onlys exist on 64 platform. Check this link for more details.
+            // http://social.msdn.microsoft.com/Forums/vstudio/en-US/24792cdc-2d8e-454b-9c68-31a19892ca53/how-to-check-whether-the-system-is-32-bit-or-64-bit-?forum=csharpgeneral
+            if (IntPtr.Size == 8)
             {
-                displayName = subkey.GetValue("DisplayName") as string;
+                key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall");
 
-                if (displayName != null && displayName.Contains(applicationName))
+                foreach (RegistryKey subkey in key.GetSubKeyNames().Select(keyName => key.OpenSubKey(keyName)))
                 {
-                    return true;
+                    displayName = subkey.GetValue("DisplayName") as string;
+
+                    if (displayName != null && displayName.Contains(applicationName))
+                    {
+                        return true;
+                    }
                 }
             }
 
@@ -52,4 +59,6 @@ namespace Espera.View
             return false;
         }
     }
+    
+
 }

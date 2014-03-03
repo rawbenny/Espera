@@ -73,10 +73,7 @@ namespace Espera.View.ViewModels
                     return "Local";
                 }
 
-                if (this.Wrapped is YoutubeSong)
-                {
-                    return "YouTube";
-                }
+                
 
                 throw new InvalidOperationException();
             }

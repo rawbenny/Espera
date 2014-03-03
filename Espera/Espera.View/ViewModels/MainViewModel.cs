@@ -138,17 +138,7 @@ namespace Espera.View.ViewModels
             }
         }
 
-        public IEnumerable<SongViewModel> SelectableYoutubeSongs
-        {
-            get
-            {
-                var finder = new YoutubeSongFinder(this.SearchText);
-                finder.Start();
-
-                return finder.SongsFound
-                    .Select(song => new SongViewModel(song));
-            }
-        }
+        
 
         public IEnumerable<SongViewModel> SelectedSongs
         {
@@ -526,15 +516,9 @@ namespace Espera.View.ViewModels
 
         public void StartSearch()
         {
-            if (this.IsYoutube)
-            {
-                Task.Factory.StartNew(() => this.OnPropertyChanged(vm => vm.SelectableYoutubeSongs));
-            }
-
-            else
-            {
-                Task.Factory.StartNew(() => this.OnPropertyChanged(vm => vm.SelectableLocalSongs));
-            }
+            
+            Task.Factory.StartNew(() => this.OnPropertyChanged(vm => vm.SelectableLocalSongs));
+            
         }
 
         /// <summary>

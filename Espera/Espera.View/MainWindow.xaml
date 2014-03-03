@@ -316,64 +316,6 @@
                             </ListView.View>
                         </ListView>
                     </TabItem>
-                    <TabItem Header="YouTube"
-                             IsEnabled="{Binding Path=IsVlcInstalled}"
-                             IsSelected="{Binding Path=IsYoutube}">
-                        <ListView ItemsSource="{Binding Path=SelectableYoutubeSongs, IsAsync=True}"
-                                  SelectionChanged="SongList_SelectionChanged"
-                                  ContextMenuOpening="SongList_ContextMenuOpening">
-                            <ListView.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="Add to playlist" Command="{Binding Path=AddSelectedSongsToPlaylistCommand}" />
-                                </ContextMenu>
-                            </ListView.ContextMenu>
-                            <ListView.ItemContainerStyle>
-                                <Style BasedOn="{StaticResource {x:Type ListViewItem}}" TargetType="{x:Type ListViewItem}">
-                                    <EventSetter Event="MouseDoubleClick" Handler="SongDoubleClick"/>
-                                </Style>
-                            </ListView.ItemContainerStyle>
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Title">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Path=Title}"
-                                                           TextTrimming="CharacterEllipsis" />
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                    <GridViewColumn Header="Duration">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Path=Duration, StringFormat=mm\\:ss}"
-                                                           TextTrimming="CharacterEllipsis" />
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                    <GridViewColumn Header="Rating">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Path=Rating, StringFormat=\{0:0.0\}, TargetNullValue=n/a}"
-                                                           TextTrimming="CharacterEllipsis" />
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                    <GridViewColumn Header="Link">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock>
-                                                    <Hyperlink Foreground="White" Command="{Binding Path=OpenPathCommand}">
-                                                        <TextBlock Text="{Binding Path=Path}"
-                                                                   TextTrimming="CharacterEllipsis" />
-                                                    </Hyperlink>
-                                                </TextBlock>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                    </TabItem>
                 </TabControl>
                 <Grid Grid.Row="2">
                     <Grid.RowDefinitions>
